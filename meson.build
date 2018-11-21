@@ -12,7 +12,7 @@ project(
 )
 
 c_compiler = meson.get_compiler('c')
-
+root_dir = meson.source_root()
 
 ###################
 ## Configuration ##
@@ -26,7 +26,6 @@ configure_file(
   output : 'lunatris_config.h',
   configuration : conf_data
 )
-
 
 ############################
 ## Flags compilation/link ##
@@ -61,7 +60,6 @@ common_args = meson.get_compiler('c').get_supported_arguments([
   '-msse4.1',
 ])
 
-
 #############
 ## Include ##
 #############
@@ -69,9 +67,14 @@ common_args = meson.get_compiler('c').get_supported_arguments([
 # Global namespace: #include <lunatris/...>
 lunatris_inc = include_directories('include', '.')
 
-
 ############
 ## Source ##
 ############
 
 subdir('src')
+
+###########
+## Tests ##
+###########
+
+subdir('tests')
