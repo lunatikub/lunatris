@@ -1,0 +1,12 @@
+[wrap-file]
+
+directory = @@DIRECTORY@@
+
+source_url = https://github.com/google/googletest/archive/release-1.7.0.tar.gz
+source_filename = release-1.7.0.tar.gz
+source_hash = f73a6546fdf9fce9ff93a5015e0333a8af3062a152a9ad6bcb772c96687016cc
+
+patch_url = @@PATCH_URL@@
+patch_filename = @@PATCH_FILENAME@@
+patch_hash = @@PATCH_HASH@@
+

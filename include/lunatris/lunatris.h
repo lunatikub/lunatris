@@ -1,8 +1,4 @@
-/**
- * @file lunatris.h
- */
+#ifndef __LUNATRIS_H__
+#define __LUNATRIS_H__
 
-#ifndef __LUNATRIS__
-#define __LUNATRIS__
-
-#endif /* !__LUNATRIS__ */
+#endif /* !__LUNATRIS_H__ */

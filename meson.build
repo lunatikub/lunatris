@@ -14,6 +14,30 @@ project(
 c_compiler = meson.get_compiler('c')
 root_dir = meson.source_root()
 
+##############################
+## Dependencies/Subprojects ##
+##############################
+
+# create subprojects directory
+run_command('mkdir', '-p', join_paths(root_dir, 'subprojects'))
+
+wrap_file = {
+  'gtest': [ '1.7.0', 'googletest-release-1.7.0' ],
+}
+
+foreach name, content : wrap_file
+  r = run_command(join_paths(root_dir,
+                             'tools',
+                             'subproject_prerequisite.sh'),
+                  name, content[0], content[1])
+  if r.returncode() != 0
+    error('subproject_prerequisite.sh')
+  endif
+endforeach
+
+gtest_proj = subproject('gtest')
+gtest_dep = gtest_proj.get_variable('gtest_dep')
+
 ###################
 ## Configuration ##
 ###################
@@ -67,14 +91,17 @@ common_args = meson.get_compiler('c').get_supported_arguments([
 # Global namespace: #include <lunatris/...>
 lunatris_inc = include_directories('include', '.')
 
-############
-## Source ##
-############
+#############
+## Modules ##
+#############
 
-subdir('src')
+# List of modules.
+modules = [
+  'wall',
+]
 
-###########
-## Tests ##
-###########
-
-subdir('tests')
+# Add sources and unit tests for each module.
+foreach module : modules
+  subdir('src/' + module)
+  subdir('tests/unit/' + module)
+endforeach
