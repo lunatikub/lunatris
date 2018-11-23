@@ -1,4 +1,5 @@
 test_wall_src = files(
+  'tests.cc',
   'wall.cc',
 )
 
@@ -11,7 +12,7 @@ unit_test_wall = executable(
   wall_src,
   include_directories: [ test_wall_inc, lunatris_inc ],
   c_args: common_args,
-  cpp_args: common_args,
+  cpp_args: common_args + [ '-std=gnu++11' ],
   dependencies: [ gtest_dep ],
 )
 

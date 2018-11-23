@@ -6,8 +6,10 @@
 project(
   'lunatris',
   'c',
+  'cpp',
   default_options : [
     'c_std=gnu11',
+    '-std=gnu++11',
   ]
 )
 
