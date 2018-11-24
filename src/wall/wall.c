@@ -3,17 +3,7 @@
 #include <assert.h>
 
 #include <lunatris/wall/wall.h>
-
-/**
- * Wall is a sliding table of @c WALL_WIDTH of width
- * and @c WALL_HEIGHT of height.
- * It is an optimization when a line is completed.
- */
-struct wall {
-  uint8_t table[WALL_HEIGHT][WALL_WIDTH];
-  uint8_t cells[WALL_HEIGHT]; /* Number of cells filled by line. */
-  uint8_t h[WALL_WIDTH]; /* Height of each columns. */
-};
+#include "wall_internal.h"
 
 static inline uint8_t check_coord(uint8_t y, uint8_t x)
 {
@@ -31,7 +21,7 @@ static void complete_line(struct wall *w, uint8_t y)
   memset(w->table[0], 0, WALL_WIDTH);
 
   for (uint8_t x = 0; x < WALL_WIDTH; ++x) {
-    if (w->h[x] != 0) {
+    if (w->h[x] > 0) {
       --w->h[x];
     }
   }
@@ -57,14 +47,14 @@ void wall_set(struct wall *w, uint8_t y, uint8_t x)
   assert(w->table[ry][x] == EMPTY);
   w->table[ry][x] = FILLED;
 
+  /* Update height of the column. */
+  if (w->h[x] < y + 1) {
+    w->h[x] = y + 1;
+  }
+
   /* Line is completed ? */
   if (++w->cells[ry] == WALL_WIDTH) {
     complete_line(w, ry);
-  }
-
-  /* Update height of the column. */
-  if (w->h[x] < y) {
-    w->h[x] = y + 1;
   }
 }
 

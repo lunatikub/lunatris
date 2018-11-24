@@ -5,12 +5,6 @@
 
 # include <lunatris/lunatris.h>
 
-# define WALL_WIDTH (10)
-# define WALL_HEIGHT (20)
-
-/* Opaque structure for a wall. */
-typedef struct wall* wall_handle;
-
 /**
  * Create and initialize a wall.
  * @param wall Wall to initialize.
@@ -39,11 +33,5 @@ void wall_set(wall_handle wall, uint8_t y, uint8_t x);
  * @return @c EMPTY or @c FILLED.
  */
 enum cell wall_get(wall_handle, uint8_t y, uint8_t x);
-
-/**
- * Return the height of a column,
- * @param x x-axis column.
- */
-uint8_t wall_height_get(wall_handle, uint8_t x);
 
 #endif /* !WALL_H_ */
