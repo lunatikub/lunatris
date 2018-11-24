@@ -5,13 +5,16 @@ language: c
 before_install:
   - sudo apt-get install python3 python3-pip python3-setuptools
   - sudo apt-get install ninja-build
+  - sudo apt-get install astyle
   - pip3 install meson==0.48.1
 
 compiler:
   - gcc
+  - clang
 
 script:
   - meson builddir
   - cd builddir
+  - ninja check-coding-style
   - ninja
   - ninja test

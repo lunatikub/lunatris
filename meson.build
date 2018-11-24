@@ -107,3 +107,14 @@ foreach module : modules
   subdir('src/' + module)
   subdir('tests/unit/' + module)
 endforeach
+
+##################
+## Coding Style ##
+##################
+
+run_target(
+  'check-coding-style',
+  command: [
+    join_paths(root_dir, 'tools', 'coding_style', 'check.sh'),
+  ]
+)
