@@ -21,10 +21,28 @@ static void complete_line(struct wall *w, uint8_t y)
   memset(w->table[0], 0, WALL_WIDTH);
 
   for (uint8_t x = 0; x < WALL_WIDTH; ++x) {
-    if (w->h[x] > 0) {
-      --w->h[x];
+    if (w->height[x] > 0) {
+      --w->height[x];
     }
   }
+}
+
+static void count_holes(struct wall *w, uint8_t x)
+{
+  uint8_t nr_holes = 0;
+
+  if (w->height[x] == 1) {
+    w->holes[x] = 0;
+    return;
+  }
+
+  for (uint8_t iter_y = WALL_HEIGHT - w->height[x] + 1;
+       iter_y < WALL_HEIGHT; ++iter_y) {
+    if (w->table[iter_y][x] == EMPTY) {
+      ++nr_holes;
+    }
+  }
+  w->holes[x] = nr_holes;
 }
 
 void wall_create(struct wall **w)
@@ -48,14 +66,17 @@ void wall_set(struct wall *w, uint8_t y, uint8_t x)
   w->table[ry][x] = FILLED;
 
   /* Update height of the column. */
-  if (w->h[x] < y + 1) {
-    w->h[x] = y + 1;
+  if (w->height[x] < y + 1) {
+    w->height[x] = y + 1;
   }
 
   /* Line is completed ? */
   if (++w->cells[ry] == WALL_WIDTH) {
     complete_line(w, ry);
   }
+
+  /* Count number of holes. */
+  count_holes(w, x);
 }
 
 enum cell wall_get(struct wall *w, uint8_t y, uint8_t x)
@@ -67,5 +88,5 @@ enum cell wall_get(struct wall *w, uint8_t y, uint8_t x)
 uint8_t wall_height_get(struct wall *w, uint8_t x)
 {
   check_coord(0, x);
-  return w->h[x];
+  return w->height[x];
 }

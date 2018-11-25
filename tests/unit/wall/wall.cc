@@ -26,13 +26,23 @@ void Wall::ExpectLine(uint8_t y, uint8_t expected[WALL_WIDTH])
 
 void Wall::Dump(void)
 {
-  std::cout << "   ";
+  std::cout << "      ";
   for (unsigned x = 0; x < WALL_WIDTH; ++x) {
     std::cout << x;
   }
   std::cout << std::endl;
+  std::cout << "      ";
+  for (unsigned x = 0; x < WALL_WIDTH; ++x) {
+    std::cout << "-";
+  }
+  std::cout << std::endl;
 
   for (int y = 19; y >= 0; --y) {
+    std::cout << 19 - y;
+    if (y >= 10) {
+      std::cout << " ";
+    }
+    std::cout << " ";
     std::cout << y << " ";
     if (y < 10) {
       std::cout << " ";
@@ -42,4 +52,15 @@ void Wall::Dump(void)
     }
     std::cout << std::endl;
   }
+
+  std::cout << "      ";
+  for (unsigned x = 0; x < WALL_WIDTH; ++x) {
+    std::cout << "-";
+  }
+  std::cout << std::endl;
+  std::cout << "      ";
+  for (unsigned x = 0; x < WALL_WIDTH; ++x) {
+    std::cout << x;
+  }
+  std::cout << std::endl;
 }

@@ -12,7 +12,8 @@
 struct wall {
   uint8_t table[WALL_HEIGHT][WALL_WIDTH];
   uint8_t cells[WALL_HEIGHT]; /* Number of cells filled by line. */
-  uint8_t h[WALL_WIDTH]; /* Height of each columns. */
+  uint8_t height[WALL_WIDTH]; /* Height of each columns. */
+  uint8_t holes[WALL_WIDTH]; /* Holes of each columns. */
 };
 
 /**

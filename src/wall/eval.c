@@ -29,3 +29,13 @@ uint32_t eval_dc(struct wall *w)
   }
   return dc;
 }
+
+uint32_t eval_h(struct wall* w)
+{
+  uint32_t h = 0;
+
+  for (uint8_t x = 0; x < WALL_WIDTH; ++x) {
+    h += w->holes[x];
+  }
+  return h;
+}
