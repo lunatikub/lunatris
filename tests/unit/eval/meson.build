@@ -1,5 +1,7 @@
 test_eval_src = files(
-  'test_eval.cc',
+  'test_eval_well.cc',
+  'test_eval_homogeneous.cc',
+  'test_eval_hole.cc',
 )
 
 unit_test_eval = executable(
