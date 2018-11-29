@@ -5,11 +5,9 @@
 
 extern "C" {
 #include <lunatris/wall/wall.h>
-#include "eval.h"
-#include "wall_internal.h"
 }
 
-class Wall: public testing::Test
+class LunatrisTest: public testing::Test
 {
 protected:
   wall_handle wall;

@@ -1,30 +1,30 @@
-#include "wall.hh"
+#include "lunatris_test.hh"
 
-void Wall::SetUp(void)
+void LunatrisTest::SetUp(void)
 {
   wall_create(&wall);
 }
 
-void Wall::TearDown(void)
+void LunatrisTest::TearDown(void)
 {
   wall_destroy(wall);
 }
 
-void Wall::SetLine(uint8_t y, uint8_t x_start, uint8_t x_end)
+void LunatrisTest::SetLine(uint8_t y, uint8_t x_start, uint8_t x_end)
 {
   for (unsigned x = x_start; x <= x_end; ++x) {
     wall_set(wall, y, x);
   }
 }
 
-void Wall::ExpectLine(uint8_t y, uint8_t expected[WALL_WIDTH])
+void LunatrisTest::ExpectLine(uint8_t y, uint8_t expected[WALL_WIDTH])
 {
   for (unsigned x = 0; x < WALL_WIDTH; ++x) {
     EXPECT_EQ(wall_get(wall, y, x), expected[x]);
   }
 }
 
-void Wall::Dump(void)
+void LunatrisTest::Dump(void)
 {
   std::cout << "      ";
   for (unsigned x = 0; x < WALL_WIDTH; ++x) {

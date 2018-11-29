@@ -97,15 +97,21 @@ lunatris_inc = include_directories('include', '.')
 ## Modules ##
 #############
 
+# Common source for all tests.
+common_path = join_paths('tests', 'unit', 'common')
+subdir(common_path)
+common_test_inc = include_directories(common_path)
+
 # List of modules.
 modules = [
   'wall',
+  'eval',
 ]
 
 # Add sources and unit tests for each module.
 foreach module : modules
-  subdir('src/' + module)
-  subdir('tests/unit/' + module)
+  subdir(join_paths('src', module))
+  subdir(join_paths('tests', 'unit', module))
 endforeach
 
 ##################

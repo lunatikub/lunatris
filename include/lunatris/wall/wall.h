@@ -34,4 +34,20 @@ void wall_set(wall_handle wall, uint8_t y, uint8_t x);
  */
 enum cell wall_get(wall_handle, uint8_t y, uint8_t x);
 
+/**
+ * Get height of a column.
+ * @param wall Wall handle.
+ * @param x x-axis column.
+ * @return height of the column.
+ */
+uint8_t wall_height_get(wall_handle w, uint8_t x);
+
+/**
+ * Get number of holes of a column.
+ * @param wall Wall handle.
+ * @param x x-asis coord.
+ * @return number of holes.
+ */
+uint8_t wall_hole_get(wall_handle w, uint8_t x);
+
 #endif /* !WALL_H_ */

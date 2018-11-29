@@ -1,15 +1,13 @@
 test_wall_src = files(
-  'main.cc',
-  'wall.cc',
   'test_wall.cc',
-  'test_eval.cc',
 )
 
 unit_test_wall = executable(
   'unit-test-wall',
   test_wall_src,
   wall_src,
-  include_directories: [ wall_internal_inc, lunatris_inc ],
+  test_common_src,
+  include_directories: [ lunatris_inc, common_test_inc ],
   c_args: common_args,
   cpp_args: common_args + [ '-std=gnu++11' ],
   dependencies: [ gtest_dep ],

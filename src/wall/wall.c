@@ -3,7 +3,17 @@
 #include <assert.h>
 
 #include <lunatris/wall/wall.h>
-#include "wall_internal.h"
+
+/**
+ * Wall is a table of @c WALL_WIDTH of width
+ * and @c WALL_HEIGHT of height.
+ */
+struct wall {
+  uint8_t table[WALL_HEIGHT][WALL_WIDTH];
+  uint8_t cells[WALL_HEIGHT]; /* Number of cells filled by line. */
+  uint8_t height[WALL_WIDTH]; /* Height of each columns. */
+  uint8_t holes[WALL_WIDTH]; /* Holes of each columns. */
+};
 
 static inline uint8_t check_coord(uint8_t y, uint8_t x)
 {
@@ -89,4 +99,10 @@ uint8_t wall_height_get(struct wall *w, uint8_t x)
 {
   check_coord(0, x);
   return w->height[x];
+}
+
+uint8_t wall_hole_get(struct wall *w, uint8_t x)
+{
+  check_coord(0, x);
+  return w->holes[x];
 }
