@@ -8,7 +8,7 @@
  * ID: dl (Delta Line).
  * Aim: Homogeneous of the wall.
  */
-uint32_t eval_delta_line(wall_handle w);
+uint32_t eval_delta_line(wall_t w);
 
 /**
  * Name: Transition of columns.
@@ -17,7 +17,7 @@ uint32_t eval_delta_line(wall_handle w);
  * ID: dl (Delta Column).
  * Aim: Homogeneous of the wall.
  */
-uint32_t eval_delta_col(wall_handle w);
+uint32_t eval_delta_col(wall_t w);
 
 /**
  * Name: Number of holes.
@@ -26,7 +26,7 @@ uint32_t eval_delta_col(wall_handle w);
  * ID: h
  * Aim: Not have holes.
  */
-uint32_t eval_hole(wall_handle w);
+uint32_t eval_hole(wall_t w);
 
 /**
  * Name: Sum of wells.
@@ -34,6 +34,6 @@ uint32_t eval_hole(wall_handle w);
  * ID: w
  * Aim: Not have wells.
  */
-uint32_t eval_well(wall_handle w);
+uint32_t eval_well(wall_t w);
 
 #endif /* !EVAL_H_ */

@@ -10,7 +10,7 @@ extern "C" {
 class LunatrisTest: public testing::Test
 {
 protected:
-  wall_handle wall;
+  wall_t wall;
   virtual void SetUp(void);
   virtual void TearDown(void);
 

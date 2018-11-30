@@ -16,7 +16,7 @@
  * col 3 to 9: 0
  */
 
-uint32_t eval_hole(wall_handle w)
+uint32_t eval_hole(wall_t w)
 {
   uint32_t h = 0;
 

@@ -106,6 +106,7 @@ common_test_inc = include_directories(common_path)
 modules = [
   'wall',
   'eval',
+  'pool',
 ]
 
 # Add sources and unit tests for each module.

@@ -34,7 +34,7 @@ static inline uint8_t sum(uint8_t h)
 /**
  * Return the minimal height of both neighbors.
  */
-static inline uint8_t min_height_neighbors(wall_handle w, uint8_t x)
+static inline uint8_t min_height_neighbors(wall_t w, uint8_t x)
 {
   uint8_t left_h = WALL_HEIGHT;
   uint8_t right_h = WALL_HEIGHT;
@@ -50,7 +50,7 @@ static inline uint8_t min_height_neighbors(wall_handle w, uint8_t x)
   return left_h > right_h ? right_h : left_h;
 }
 
-uint32_t eval_well(wall_handle w)
+uint32_t eval_well(wall_t w)
 {
   uint32_t well = 0;
 

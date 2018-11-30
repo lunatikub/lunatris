@@ -12,7 +12,7 @@
  * X..X.X.X.
  */
 
-uint32_t eval_delta_line(wall_handle w)
+uint32_t eval_delta_line(wall_t w)
 {
   uint32_t dl = 0;
 
@@ -28,7 +28,7 @@ uint32_t eval_delta_line(wall_handle w)
   return dl;
 }
 
-uint32_t eval_delta_col(wall_handle w)
+uint32_t eval_delta_col(wall_t w)
 {
   uint32_t dc = 0;
 

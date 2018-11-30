@@ -57,16 +57,14 @@ static void count_holes(struct wall *w, uint8_t x)
 
 void wall_create(struct wall **w)
 {
-  struct wall *new_wall = malloc(sizeof(*new_wall));
+  struct wall *new_wall = calloc(1, sizeof(*new_wall));
   assert(new_wall != NULL);
-  memset(new_wall, 0, sizeof((*new_wall)));
   *w = new_wall;
 }
 
 void wall_destroy(struct wall *w)
 {
   free(w);
-  w = NULL;
 }
 
 void wall_set(struct wall *w, uint8_t y, uint8_t x)
