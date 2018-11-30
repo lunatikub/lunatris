@@ -1,6 +1,7 @@
 #ifndef WALL_H_
 # define WALL_H_
 
+#include <stddef.h>
 #include <stdint.h>
 
 #include <lunatris/lunatris.h>
@@ -52,5 +53,12 @@ uint8_t wall_height_get(wall_t w, uint8_t x);
  * @return number of holes.
  */
 uint8_t wall_hole_get(wall_t w, uint8_t x);
+
+/**
+ * Get the size of a wall.
+ * Useful for pool implementation.
+ * @return size of a wall.
+ */
+size_t wall_size_get(void);
 
 #endif /* !WALL_H_ */

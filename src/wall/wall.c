@@ -104,3 +104,8 @@ uint8_t wall_hole_get(struct wall *w, uint8_t x)
   check_coord(0, x);
   return w->holes[x];
 }
+
+size_t wall_size_get(void)
+{
+  return sizeof(struct wall);
+}

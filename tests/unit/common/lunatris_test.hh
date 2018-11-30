@@ -5,12 +5,14 @@
 
 extern "C" {
 #include <lunatris/wall/wall.h>
+#include <lunatris/pool/pool.h>
 }
 
 class LunatrisTest: public testing::Test
 {
 protected:
   wall_t wall;
+  pool_t pool;
   virtual void SetUp(void);
   virtual void TearDown(void);
 
