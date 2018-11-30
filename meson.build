@@ -128,3 +128,14 @@ run_target(
     join_paths(root_dir, 'tools', 'coding_style', 'check.sh'),
   ]
 )
+
+#####################
+## Check allocator ##
+#####################
+
+run_target(
+  'check-allocator',
+  command: [
+    join_paths(root_dir, 'tools', 'check_allocator.sh'),
+  ]
+)
