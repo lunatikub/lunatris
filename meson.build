@@ -47,9 +47,12 @@ gtest_dep = gtest_proj.get_variable('gtest_dep')
 conf_data = configuration_data()
 
 conf_data.set('LUNATRIS_VERSION', '"1.0"')
+conf_data.set('LUNATRIS_MEMORY', get_option('memory-profiling'))
+conf_data.set('LUNATRIS_PERF', get_option('perf-profiling'))
 
 configure_file(
-  output : 'lunatris_config.h',
+  input: join_paths(root_dir, 'include', 'lunatris', 'config.h.in'),
+  output: 'config.h',
   configuration : conf_data
 )
 
@@ -97,16 +100,16 @@ lunatris_inc = include_directories('include', '.')
 ## Modules ##
 #############
 
-# Common source for all tests.
-common_path = join_paths('tests', 'unit', 'common')
-subdir(common_path)
-common_test_inc = include_directories(common_path)
+# Common main source for all tests.
+main_test_src = files(join_paths('tests', 'unit', 'main.cc'))
 
 # List of modules.
+# Order can matter according to dependencies.
 modules = [
-  'wall',
-  'eval',
-  'pool',
+  'profiling',
+  'pool', # profiling
+  'wall', # profiling
+  'eval', # profiling, wall
 ]
 
 # Add sources and unit tests for each module.

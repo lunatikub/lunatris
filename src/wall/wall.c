@@ -1,8 +1,11 @@
-#include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 
 #include <lunatris/wall/wall.h>
+#include <lunatris/profiling/memory.h>
+
+/* memory/perf */
+#define MODULE_ID MODULE_WALL
 
 /**
  * Wall is a table of @c WALL_WIDTH of width
@@ -57,14 +60,14 @@ static void count_holes(struct wall *w, uint8_t x)
 
 void wall_create(struct wall **w)
 {
-  struct wall *new_wall = calloc(1, sizeof(*new_wall));
+  struct wall *new_wall = CALLOC(1, sizeof(*new_wall), SID_WALL);
   assert(new_wall != NULL);
   *w = new_wall;
 }
 
 void wall_destroy(struct wall *w)
 {
-  free(w);
+  FREE(w, SID_WALL);
 }
 
 void wall_set(struct wall *w, uint8_t y, uint8_t x)

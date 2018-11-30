@@ -1,6 +1,16 @@
-#include <lunatris_test.hh>
+#include <gtest/gtest.h>
 
-TEST_F(LunatrisTest, Pool)
+extern "C" {
+#include <lunatris/pool/pool.h>
+}
+
+class Pool: public testing::Test
+{
+protected:
+  pool_t pool;
+};
+
+TEST_F(Pool, Basic)
 {
   const size_t pool_sz = 12;
   uint32_t *data[pool_sz];
@@ -30,7 +40,7 @@ TEST_F(LunatrisTest, Pool)
   EXPECT_EQ(pool_destroy(pool), true);
 }
 
-TEST_F(LunatrisTest, PoolNoRelease)
+TEST_F(Pool, NoRelease)
 {
   pool_create(&pool, 1, 1);
   void *tmp = pool_reserve(pool);
@@ -39,7 +49,7 @@ TEST_F(LunatrisTest, PoolNoRelease)
   EXPECT_EQ(pool_destroy(pool), true);
 }
 
-TEST_F(LunatrisTest, PoolExtend)
+TEST_F(Pool, Extend)
 {
   void *ptr[5];
 

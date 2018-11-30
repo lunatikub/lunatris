@@ -1,6 +1,45 @@
-#include <lunatris_test.hh>
+#include <gtest/gtest.h>
 
-TEST_F(LunatrisTest, Init)
+extern "C" {
+#include <lunatris/wall/wall.h>
+}
+
+class Wall: public testing::Test
+{
+protected:
+  wall_t wall;
+  virtual void SetUp(void);
+  virtual void TearDown(void);
+
+  void SetLine(uint8_t y, uint8_t x_start, uint8_t x_end);
+  void ExpectLine(uint8_t y, uint8_t expected[WALL_WIDTH]);
+};
+
+void Wall::SetUp(void)
+{
+  wall_create(&wall);
+}
+
+void Wall::TearDown(void)
+{
+  wall_destroy(wall);
+}
+
+void Wall::SetLine(uint8_t y, uint8_t x_start, uint8_t x_end)
+{
+  for (unsigned x = x_start; x <= x_end; ++x) {
+    wall_set(wall, y, x);
+  }
+}
+
+void Wall::ExpectLine(uint8_t y, uint8_t expected[WALL_WIDTH])
+{
+  for (unsigned x = 0; x < WALL_WIDTH; ++x) {
+    EXPECT_EQ(wall_get(wall, y, x), expected[x]);
+  }
+}
+
+TEST_F(Wall, Init)
 {
   uint8_t empty_line[WALL_WIDTH] = { 0 };
 
@@ -9,25 +48,25 @@ TEST_F(LunatrisTest, Init)
   }
 }
 
-TEST_F(LunatrisTest, WrongCoord)
+TEST_F(Wall, WrongCoord)
 {
   EXPECT_DEATH(wall_set(wall, -1, 0), "Assertion `y < WALL_HEIGHT' failed.");
   EXPECT_DEATH(wall_set(wall, 0, -1), "Assertion `x < WALL_WIDTH' failed.");
 }
 
-TEST_F(LunatrisTest, SetAlreadySet)
-{
-  wall_set(wall, 0, 0);
-  EXPECT_DEATH(wall_set(wall, 0, 0), "Assertion `w->table.* == EMPTY' failed.");
-}
-
-TEST_F(LunatrisTest, BasicSet)
+TEST_F(Wall, BasicSet)
 {
   EXPECT_EQ(EMPTY, wall_get(wall, 0, 0));
   wall_set(wall, 0, 0);
   EXPECT_EQ(FILLED, wall_get(wall, 0, 0));
   wall_set(wall, 5, 5);
   EXPECT_EQ(FILLED, wall_get(wall, 5, 5));
+}
+
+TEST_F(Wall, AlreadySet)
+{
+  wall_set(wall, 0, 0);
+  EXPECT_DEATH(wall_set(wall, 0, 0), "Assertion `w->table.* == EMPTY' failed.");
 }
 
 /**
@@ -37,7 +76,7 @@ TEST_F(LunatrisTest, BasicSet)
  * 1  - XXXXXXXXX.
  * 0  - XXXXXXXXX.
  */
-TEST_F(LunatrisTest, MultipleSet)
+TEST_F(Wall, MultipleSet)
 {
   for (unsigned y = 0; y < WALL_HEIGHT; ++y) {
     SetLine(y, 0, 8); // Don't complete the line
@@ -58,7 +97,7 @@ TEST_F(LunatrisTest, MultipleSet)
  * 1 - XXXXXXXXX.
  * 0 - XXXXXXXXXX
  */
-TEST_F(LunatrisTest, BasicCompleteLine)
+TEST_F(Wall, CompleteLine)
 {
   SetLine(4, 0, 0);
   SetLine(3, 0, 2);
@@ -110,7 +149,7 @@ TEST_F(LunatrisTest, BasicCompleteLine)
  *
  * 'O' in a seconde time
  */
-TEST_F(LunatrisTest, ComplexCompleteLine)
+TEST_F(Wall, CompleteAllLine)
 {
   for (unsigned y = 0; y < WALL_HEIGHT; ++y) {
     SetLine(y, 0, 8); // Don't complete the line

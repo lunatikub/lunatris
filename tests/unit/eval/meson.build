@@ -2,6 +2,7 @@ test_eval_src = files(
   'test_eval_well.cc',
   'test_eval_homogeneous.cc',
   'test_eval_hole.cc',
+  'test_eval.cc',
 )
 
 unit_test_eval = executable(
@@ -9,8 +10,9 @@ unit_test_eval = executable(
   test_eval_src,
   eval_src,
   wall_src,
-  test_common_src,
-  include_directories: [ lunatris_inc, common_test_inc ],
+  profiling_src,
+  main_test_src,
+  include_directories: [ lunatris_inc  ],
   c_args: common_args,
   cpp_args: common_args + [ '-std=gnu++11' ],
   dependencies: [ gtest_dep ],

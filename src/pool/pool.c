@@ -1,13 +1,16 @@
 #include <stddef.h>
-#include <stdlib.h>
 #include <assert.h>
 #include <sys/queue.h>
 #include <pthread.h>
 #include <stdbool.h>
 #include <string.h>
 
-#include <lunatris/utils.h>
 #include <lunatris/pool/pool.h>
+#include <lunatris/utils/macro.h>
+#include <lunatris/profiling/memory.h>
+
+/* memory/perf */
+#define MODULE_ID MODULE_POOL
 
 struct ressource {
   STAILQ_ENTRY(ressource) next;
@@ -28,7 +31,7 @@ struct pool {
 static struct ressource* ressource_new(size_t data_sz)
 {
   struct ressource *new_ressource =
-    calloc(1, sizeof(*new_ressource) + data_sz);
+    CALLOC(1, sizeof(*new_ressource) + data_sz, SID_RESSOURCE);
   assert(new_ressource != NULL);
 
   return new_ressource;
@@ -51,7 +54,8 @@ void pool_extend(struct pool *pool, size_t sz)
 
 void pool_create(struct pool **pool, size_t sz, size_t data_sz)
 {
-  struct pool *new_pool = calloc(1, sizeof(*new_pool));
+  struct pool *new_pool =
+    CALLOC(1, sizeof(*new_pool), SID_POOL);
   assert(new_pool != NULL);
   *pool = new_pool;
 
@@ -73,11 +77,11 @@ bool pool_destroy(struct pool *pool)
   while (!STAILQ_EMPTY(&pool->ressources)) {
     iter = STAILQ_FIRST(&pool->ressources);
     STAILQ_REMOVE_HEAD(&pool->ressources, next);
-    free(iter);
+    FREE(iter, SID_RESSOURCE);
   }
 
   pthread_mutex_destroy(&pool->lock);
-  free(pool);
+  FREE(pool, SID_POOL);
 
   return true;
 }

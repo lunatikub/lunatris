@@ -1,10 +1,6 @@
-#include <lunatris_test.hh>
+#include "test_eval.hh"
 
-extern "C" {
-#include <lunatris/eval/eval.h>
-}
-
-TEST_F(LunatrisTest, EvalDeltaLine)
+TEST_F(Eval, DeltaLine)
 {
   uint32_t dl = 0;
 
@@ -35,7 +31,7 @@ TEST_F(LunatrisTest, EvalDeltaLine)
   EXPECT_EQ(eval_delta_line(wall), dl);
 }
 
-TEST_F(LunatrisTest, EValDeltaCol)
+TEST_F(Eval, DeltaCol)
 {
   uint32_t dc = 0;
 

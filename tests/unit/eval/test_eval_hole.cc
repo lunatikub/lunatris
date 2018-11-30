@@ -1,10 +1,6 @@
-#include <lunatris_test.hh>
+#include "test_eval.hh"
 
-extern "C" {
-#include <lunatris/eval/eval.h>
-}
-
-TEST_F(LunatrisTest, EvalHole)
+TEST_F(Eval, Hole)
 {
   EXPECT_EQ(eval_hole(wall), 0u);
 

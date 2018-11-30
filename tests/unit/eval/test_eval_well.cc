@@ -1,10 +1,6 @@
-#include <lunatris_test.hh>
+#include "test_eval.hh"
 
-extern "C" {
-#include <lunatris/eval/eval.h>
-}
-
-TEST_F(LunatrisTest, EvalWell)
+TEST_F(Eval, Well)
 {
   // 1 - X.........
   // 0 - X.........
@@ -36,7 +32,7 @@ TEST_F(LunatrisTest, EvalWell)
   EXPECT_EQ(eval_well(wall), 9u);
 }
 
-TEST_F(LunatrisTest, EvalWellLimit)
+TEST_F(Eval, WellLimit)
 {
   // 1 - .X........
   // 0 - .X........
@@ -51,7 +47,7 @@ TEST_F(LunatrisTest, EvalWellLimit)
   EXPECT_EQ(eval_well(wall), 6u);
 }
 
-TEST_F(LunatrisTest, EvalWellCascade)
+TEST_F(Eval, WellCascade)
 {
   // 4 - X.........
   // 3 - X.X.......
