@@ -14,6 +14,8 @@ dir_list=(
 
 ret=0
 
+echo "Version: $(${ASTYLE} --version)"
+
 for dir in ${dir_list[@]}
 do
     for file in $(find ${ROOT_DIR}/${dir} -regex ".*\.[c|h][c|h]?")
