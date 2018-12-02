@@ -9,7 +9,7 @@
 #include <lunatris/utils/macro.h>
 #include <lunatris/profiling/memory.h>
 
-/* memory/perf */
+/* profiling */
 #define MODULE_ID MODULE_POOL
 
 struct ressource {

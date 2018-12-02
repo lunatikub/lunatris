@@ -4,7 +4,7 @@
 #include <lunatris/wall/wall.h>
 #include <lunatris/profiling/memory.h>
 
-/* memory/perf */
+/* profiling */
 #define MODULE_ID MODULE_WALL
 
 /**

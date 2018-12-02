@@ -2,42 +2,43 @@
 # define PROFILING_MEMORY_H
 
 #include <config.h>
+#include <stdlib.h>
 
 #ifdef LUNATRIS_MEMORY
 
-#include <stdlib.h>
 #include <stdint.h>
 #include <lunatris/module.h>
-
-/* Combine module id and structure id to have an unique id. */
-#define MEMORY_ID(mid, sid) (mid << 24 & sid)
+#include <lunatris/profiling/struct_def.h>
 
 /**
- * Each structure must have an entry
- * this following enumeration.
+ * In 'memory-profiling' enabled, redirect on overloaded functions.
  */
-enum struct_id {
-  SID_WALL,
-  SID_POOL,
-  SID_RESSOURCE,
-};
+#define MALLOC(size, sid) \
+  mem_malloc(size, MODULE_ID, sid, __LINE__, __FILE__)
 
-#define MALLOC(size, sid) lunatris_malloc(size, MEMORY_ID(MODULE_ID, sid))
-#define CALLOC(nmemb, size, sid) lunatris_calloc(nmemb, size, MEMORY_ID(MODULE_ID, sid))
-#define FREE(ptr, sid) lunatris_free(ptr, MEMORY_ID(MODULE_ID, sid))
+#define CALLOC(nmemb, size, sid) \
+  mem_calloc(nmemb, size, MODULE_ID, sid, __LINE__, __FILE__)
+
+#define FREE(ptr, sid) mem_free(ptr)
 
 /**
- * Malloc/Calloc/Free.
- * Realloc is forbidde.
+ * Overload functions of malloc/calloc/free
+ * for the memory profiling.
  */
-void *lunatris_malloc(size_t size, uint32_t id);
-void *lunatris_calloc(size_t nmemb, size_t size, uint32_t id);
-void lunatris_free(void *ptr, uint32_t id);
+void *mem_malloc(size_t size, enum module_id mid, enum struct_id sid,
+                 uint32_t line, const char *file);
+
+void mem_free(void *ptr);
+
+void *mem_calloc(size_t nmemb, size_t size,
+                 enum module_id mid, enum struct_id sid,
+                 uint32_t line, const char *file);
 
 #else
 
-#include <stdlib.h>
-
+/**
+ * In 'memory-profiling' disabled, redirect on standard functions.
+ */
 #define MALLOC(size, mid, sid) malloc(size)
 #define CALLOC(nmemb, size, sid) calloc(nmemb, size)
 #define FREE(ptr, sid) free(ptr)
