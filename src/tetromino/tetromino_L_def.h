@@ -1,5 +1,5 @@
 #ifndef TETROMINO_L_DEF_H_
-# define TETROMINO_L_DEF_H
+# define TETROMINO_L_DEF_H_
 
 /**
  * +----+----+----+----+

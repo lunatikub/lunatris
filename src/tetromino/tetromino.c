@@ -11,6 +11,7 @@
 #include "tetromino_J_def.h"
 #include "tetromino_T_def.h"
 #include "tetromino_S_def.h"
+#include "tetromino_Z_def.h"
 
 /**
  * Return true if the tetromino can be push at the x position.
@@ -43,6 +44,7 @@ tetromino_def_get(enum tetromino tetromino, uint8_t *nr_rotate)
     DEF_CASE(J);
     DEF_CASE(T);
     DEF_CASE(S);
+    DEF_CASE(Z);
 
     default:
       return NULL;
@@ -195,6 +197,7 @@ static void __attribute__((constructor)) tetromino_defs(void)
   TETROMINO_DEF(J);
   TETROMINO_DEF(T);
   TETROMINO_DEF(S);
+  TETROMINO_DEF(Z);
 
 #undef TETROMINO_DEF
 }
