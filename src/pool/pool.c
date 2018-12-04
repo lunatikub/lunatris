@@ -1,5 +1,4 @@
 #include <stddef.h>
-#include <assert.h>
 #include <sys/queue.h>
 #include <pthread.h>
 #include <stdbool.h>
@@ -32,7 +31,6 @@ static struct ressource* ressource_new(size_t data_sz)
 {
   struct ressource *new_ressource =
     CALLOC(1, sizeof(*new_ressource) + data_sz, SID_RESSOURCE);
-  assert(new_ressource != NULL);
 
   return new_ressource;
 }
@@ -56,7 +54,6 @@ void pool_create(struct pool **pool, size_t sz, size_t data_sz)
 {
   struct pool *new_pool =
     CALLOC(1, sizeof(*new_pool), SID_POOL);
-  assert(new_pool != NULL);
   *pool = new_pool;
 
   pthread_mutex_init(&new_pool->lock, NULL);

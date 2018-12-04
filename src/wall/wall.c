@@ -61,7 +61,6 @@ static void count_holes(struct wall *w, uint8_t x)
 void wall_create(struct wall **w)
 {
   struct wall *new_wall = CALLOC(1, sizeof(*new_wall), SID_WALL);
-  assert(new_wall != NULL);
   *w = new_wall;
 }
 

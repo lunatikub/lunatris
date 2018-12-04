@@ -107,9 +107,10 @@ main_test_src = files(join_paths('tests', 'unit', 'main.cc'))
 # Order can matter according to dependencies.
 modules = [
   'profiling',
-  'pool', # profiling
-  'wall', # profiling
-  'eval', # profiling, wall
+  'pool',
+  'wall',
+  'eval',
+  'tetromino',
 ]
 
 # Add sources and unit tests for each module.
