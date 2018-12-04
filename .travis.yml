@@ -15,7 +15,6 @@ compiler:
 script:
   - meson builddir
   - cd builddir
-  - ninja check-coding-style
   - ninja check-allocator
   - ninja
   - ninja test
