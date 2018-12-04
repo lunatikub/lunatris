@@ -12,22 +12,22 @@
 static struct tetromino_def tetromino_I[] = {
   {
     {
-      { 0, 0, 0, 0 },
-      { 0, 0, 0, 0 },
-      { 0, 0, 0, 0 },
-      { 1, 1, 1, 1 },
+      { _, _, _, _ },
+      { _, _, _, _ },
+      { _, _, _, _ },
+      { X, X, X, X },
     },
   },
   {
     {
-      { 1, 0, 0, 0 },
-      { 1, 0, 0, 0 },
-      { 1, 0, 0, 0 },
-      { 1, 0, 0, 0 },
+      { X, _, _, _ },
+      { X, _, _, _ },
+      { X, _, _, _ },
+      { X, _, _, _ },
     },
   },
 };
 
-#define TETROMINO_I_SZ (sizeof(tetromino_I) / sizeof(tetromino_I[0]))
+#define TETROMINO_I_SZ DEF_SZ(I)
 
-#endif /* !TETROMINO_INTERNAL_H_ */
+#endif /* !TETROMINO_I_DEF_H_ */

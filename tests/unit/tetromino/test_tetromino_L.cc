@@ -65,17 +65,3 @@ TEST_F(Tetromino, L3)
   ExpectLine(1, e3);
   ExpectLine(0, e4);
 }
-
-  // for (int x = 0; x < 10; ++x) {
-  //   std::cout << x;
-  // }
-  // std::cout << std::endl;
-  // std::cout << std::endl;
-
-  // for (int y = 19; y >= 0; --y) {
-  //   for (int x = 0; x < 10; ++x) {
-  //     std::cout << wall_get(wall, y, x);
-  //   }
-  //   std::cout << std::endl;
-  // }
-  // std::cout << std::endl;

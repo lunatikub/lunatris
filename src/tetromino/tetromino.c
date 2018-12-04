@@ -1,23 +1,6 @@
 #include <assert.h>
 #include <lunatris/tetromino/tetromino.h>
-
-/**
- * A tetromino is defined by an array of cells of dim 4x4.
- */
-#define TETROMINO_SZ (4)
-
-/**
- * Definition of a tetromino.
- */
-struct tetromino_def {
-  uint8_t t[TETROMINO_SZ][TETROMINO_SZ];
-  /* All the following fields will
-     be automaticly completed at initialization
-     by @c tetromino_defs(). */
-  uint8_t hc[TETROMINO_SZ]; /* Height by column. */
-  uint8_t w; /* Width of the tetromino. */
-  uint8_t h; /* Height of the tetromino. */
-};
+#include "tetromino_def.h"
 
 /**
  * Import all definitions of each tetromino.
@@ -26,6 +9,8 @@ struct tetromino_def {
 #include "tetromino_O_def.h"
 #include "tetromino_L_def.h"
 #include "tetromino_J_def.h"
+#include "tetromino_T_def.h"
+#include "tetromino_S_def.h"
 
 /**
  * Return true if the tetromino can be push at the x position.
@@ -56,6 +41,8 @@ tetromino_def_get(enum tetromino tetromino, uint8_t *nr_rotate)
     DEF_CASE(O);
     DEF_CASE(L);
     DEF_CASE(J);
+    DEF_CASE(T);
+    DEF_CASE(S);
 
     default:
       return NULL;
@@ -206,6 +193,8 @@ static void __attribute__((constructor)) tetromino_defs(void)
   TETROMINO_DEF(O);
   TETROMINO_DEF(L);
   TETROMINO_DEF(J);
+  TETROMINO_DEF(T);
+  TETROMINO_DEF(S);
 
 #undef TETROMINO_DEF
 }

@@ -1,49 +1,49 @@
-#ifndef TETROMINO_L_DEF_H_
-# define TETROMINO_L_DEF_H
+#ifndef TETROMINO_T_DEF_H_
+# define TETROMINO_T_DEF_H_
 
 /**
  * +----+----+----+----+
  * |....|....|....|....|
- * |....|XX..|....|.X..|
- * |X...|X...|XXX.|.X..|
- * |XXX.|X...|..X.|XX..|
+ * |....|X...|....|.X..|
+ * |.X..|XX..|XXX.|XX..|
+ * |XXX.|X...|.X..|.X..|
  * +----+----+----+----+
  */
-static struct tetromino_def tetromino_L[] = {
+static struct tetromino_def tetromino_T[] = {
   {
     {
       { _, _, _, _ },
-      { _, _, _, _ },
-      { X, _, _, _ },
-      { X, X, X, _ },
-    },
-  },
-  {
-    {
-      { _, _, _, _ },
-      { _, _, _, _ },
-      { X, _, _, _ },
-      { X, X, X, _ },
-    },
-  },
-  {
-    {
-      { _, _, _, _ },
-      { _, _, _, _ },
-      { X, X, X, _ },
-      { _, _, X, _ },
-    },
-  },
-  {
-    {
       { _, _, _, _ },
       { _, X, _, _ },
+      { X, X, X, _ },
+    },
+  },
+  {
+    {
+      { _, _, _, _ },
+      { X, _, _, _ },
+      { X, X, _, _ },
+      { X, _, _, _ },
+    },
+  },
+  {
+    {
+      { _, _, _, _ },
+      { _, _, _, _ },
+      { X, X, X, _ },
+      { _, X, _, _ },
+    },
+  },
+  {
+    {
+      { _, _, _, _ },
       { _, X, _, _ },
       { X, X, _, _ },
+      { _, X, _, _ },
     },
   },
 };
 
-#define TETROMINO_L_SZ DEF_SZ(L)
+#define TETROMINO_T_SZ DEF_SZ(T)
 
-#endif /* !TETROMINO_L_DEF_H_ */
+#endif /* !TETROMINO_T_DEF_H_ */
