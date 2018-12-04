@@ -13,7 +13,7 @@ struct tetromino_def {
   uint8_t t[TETROMINO_SZ][TETROMINO_SZ];
   /* All the following fields will
      be automaticly completed at initialization
-     by @c tetromino_def(). */
+     by @c tetromino_defs(). */
   uint8_t hc[TETROMINO_SZ]; /* Height by column. */
   uint8_t w; /* Width of the tetromino. */
   uint8_t h; /* Height of the tetromino. */
@@ -45,19 +45,20 @@ check_x_axis(const struct tetromino_def *def, uint8_t x)
 static struct tetromino_def*
 tetromino_def_get(enum tetromino tetromino, uint8_t *nr_rotate)
 {
+#define DEF_CASE(tetromino)                             \
+  case TETROMINO_ ## tetromino:                         \
+    *nr_rotate = TETROMINO_ ## tetromino ## _SZ;        \
+    return tetromino_ ## tetromino;
+
   switch (tetromino) {
-    case TETROMINO_I:
-      *nr_rotate = TETROMINO_I_SZ;
-      return tetromino_I;
-    case TETROMINO_O:
-      *nr_rotate = TETROMINO_O_SZ;
-      return tetromino_O;
-    case TETROMINO_L:
-      *nr_rotate = TETROMINO_L_SZ;
-      return tetromino_L;
+    DEF_CASE(I);
+    DEF_CASE(O);
+    DEF_CASE(L);
     default:
       return NULL;
   };
+
+#undef DEF_CASE
 }
 
 /**
@@ -177,7 +178,7 @@ static void tetromino_def_h(struct tetromino_def *def)
  * Determinate properties definition for each
  * rotation of a tetromino.
  */
-static void tetromino_def_rotate(struct tetromino_def *def, size_t sz)
+static void tetromino_def(struct tetromino_def *def, size_t sz)
 {
   for (uint8_t i = 0; i < sz; ++i) {
     tetromino_def_hc(&def[i]);
@@ -189,9 +190,15 @@ static void tetromino_def_rotate(struct tetromino_def *def, size_t sz)
 /**
  * Determinate properties of each tetromino.
  */
-static void __attribute__((constructor)) tetromino_def(void)
+static void __attribute__((constructor)) tetromino_defs(void)
 {
-  tetromino_def_rotate(tetromino_I, TETROMINO_I_SZ);
-  tetromino_def_rotate(tetromino_O, TETROMINO_O_SZ);
-  tetromino_def_rotate(tetromino_L, TETROMINO_L_SZ);
+#define TETROMINO_DEF(tetromino) \
+  tetromino_def(tetromino_ ## tetromino, \
+                TETROMINO_ ## tetromino ## _SZ)
+
+  TETROMINO_DEF(I);
+  TETROMINO_DEF(O);
+  TETROMINO_DEF(L);
+
+#undef TETROMINO_DEF
 }

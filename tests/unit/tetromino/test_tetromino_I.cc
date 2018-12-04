@@ -16,11 +16,9 @@ TEST_F(Tetromino, IXaxis)
 
 TEST_F(Tetromino, IYaxis)
 {
-  EXPECT_EQ(tetromino_push(wall, TETROMINO_I, 1, 0), TETROMINO_OK);
-  EXPECT_EQ(tetromino_push(wall, TETROMINO_I, 1, 0), TETROMINO_OK);
-  EXPECT_EQ(tetromino_push(wall, TETROMINO_I, 1, 0), TETROMINO_OK);
-  EXPECT_EQ(tetromino_push(wall, TETROMINO_I, 1, 0), TETROMINO_OK);
-  EXPECT_EQ(tetromino_push(wall, TETROMINO_I, 1, 0), TETROMINO_OK);
+  for (unsigned i = 0; i < 5; ++i) {
+    EXPECT_EQ(tetromino_push(wall, TETROMINO_I, 1, 0), TETROMINO_OK);
+  }
   EXPECT_EQ(tetromino_push(wall, TETROMINO_I, 1, 0), TETROMINO_EINVAL_Y);
 }
 
