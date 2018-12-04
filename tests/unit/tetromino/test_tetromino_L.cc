@@ -5,7 +5,7 @@ TEST_F(Tetromino, LRotate)
   for (unsigned i = 0; i < 4; ++i) {
     EXPECT_EQ(tetromino_push(wall, TETROMINO_L, i, 0), TETROMINO_OK);
   }
-  EXPECT_EQ(tetromino_push(wall, TETROMINO_O, 4, 0), TETROMINO_EINVAL_ROTATE);
+  EXPECT_EQ(tetromino_push(wall, TETROMINO_L, 4, 0), TETROMINO_EINVAL_ROTATE);
 }
 
 TEST_F(Tetromino, LXaxis)

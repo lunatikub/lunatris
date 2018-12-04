@@ -25,6 +25,7 @@ struct tetromino_def {
 #include "tetromino_I_def.h"
 #include "tetromino_O_def.h"
 #include "tetromino_L_def.h"
+#include "tetromino_J_def.h"
 
 /**
  * Return true if the tetromino can be push at the x position.
@@ -54,6 +55,8 @@ tetromino_def_get(enum tetromino tetromino, uint8_t *nr_rotate)
     DEF_CASE(I);
     DEF_CASE(O);
     DEF_CASE(L);
+    DEF_CASE(J);
+
     default:
       return NULL;
   };
@@ -71,9 +74,12 @@ tetromino_height_get(const struct tetromino_def *def,
   uint8_t tetromino_h = 0;
 
   for (uint8_t i = 0; i < def->w; ++i) {
-    uint8_t h = wall_height_get(wall, i + x) - def->hc[i] + 1;
-    if (tetromino_h < h) {
-      tetromino_h = h;
+    uint8_t wall_h = wall_height_get(wall, i + x);
+    if (wall_h + 1 > def->hc[i]) {
+      uint8_t h =  wall_h - def->hc[i] + 1;
+      if (tetromino_h < h) {
+        tetromino_h = h;
+      }
     }
   }
 
@@ -199,6 +205,7 @@ static void __attribute__((constructor)) tetromino_defs(void)
   TETROMINO_DEF(I);
   TETROMINO_DEF(O);
   TETROMINO_DEF(L);
+  TETROMINO_DEF(J);
 
 #undef TETROMINO_DEF
 }

@@ -3,6 +3,7 @@ test_tetromino_src = files(
   'test_tetromino_I.cc',
   'test_tetromino_O.cc',
   'test_tetromino_L.cc',
+  'test_tetromino_J.cc',
 )
 
 unit_test_tetromino = executable(
