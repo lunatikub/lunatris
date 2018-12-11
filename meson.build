@@ -16,6 +16,8 @@ project(
 c_compiler = meson.get_compiler('c')
 root_dir = meson.source_root()
 
+thread_dep = dependency('threads')
+
 ##############################
 ## Dependencies/Subprojects ##
 ##############################
@@ -39,6 +41,9 @@ endforeach
 
 gtest_proj = subproject('gtest')
 gtest_dep = gtest_proj.get_variable('gtest_dep')
+
+ncurses_dep = c_compiler.find_library('ncurses')
+rt_dep = c_compiler.find_library('rt')
 
 ###################
 ## Configuration ##
