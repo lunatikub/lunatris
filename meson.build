@@ -116,13 +116,35 @@ modules = [
   'wall',
   'eval',
   'tetromino',
+  'displayer',
 ]
 
-# Add sources and unit tests for each module.
+# Add sources and unit tests (if exist) for each module.
 foreach module : modules
   subdir(join_paths('src', module))
-  subdir(join_paths('tests', 'unit', module))
+  unit_test_dir = join_paths('tests', 'unit', module)
+  if run_command('[', '-d', module, ']').returncode() == 0
+    subdir(unit_test_dir)
+  endif
 endforeach
+
+##############
+## Lunatris ##
+##############
+
+luantris = executable(
+  'lunatris',
+  join_paths('src', 'lunatris.c'),
+  displayer_src,
+  wall_src,
+  tetromino_src,
+  include_directories: lunatris_inc,
+  c_args: common_args,
+  dependencies: [
+    ncurses_dep,
+    thread_dep,
+  ],
+)
 
 ##################
 ## Coding Style ##
