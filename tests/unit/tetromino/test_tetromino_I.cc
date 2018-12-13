@@ -22,6 +22,23 @@ TEST_F(Tetromino, IYaxis)
   EXPECT_EQ(tetromino_push(wall, TETROMINO_I, 1, 0), TETROMINO_EINVAL_Y);
 }
 
+TEST_F(Tetromino, I_h)
+{
+  tetromino_push(wall, TETROMINO_I, 0, 0);
+  EXPECT_EQ(wall_last_tetromino_height_get(wall), 1);
+
+  tetromino_push(wall, TETROMINO_I, 1, 7);
+  EXPECT_EQ(wall_last_tetromino_height_get(wall), 4);
+  tetromino_push(wall, TETROMINO_I, 1, 7);
+  EXPECT_EQ(wall_last_tetromino_height_get(wall), 8);
+
+  tetromino_push(wall, TETROMINO_I, 1, 0);
+  EXPECT_EQ(wall_last_tetromino_height_get(wall), 5);
+
+  tetromino_push(wall, TETROMINO_I, 0, 6);
+  EXPECT_EQ(wall_last_tetromino_height_get(wall), 9);
+}
+
 TEST_F(Tetromino, I)
 {
   uint8_t e1[WALL_WIDTH] = { 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 };

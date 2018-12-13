@@ -16,6 +16,13 @@ struct wall {
   uint8_t cells[WALL_HEIGHT]; /* Number of cells filled by line. */
   uint8_t height[WALL_WIDTH]; /* Height of each columns. */
   uint8_t holes[WALL_WIDTH]; /* Holes of each columns. */
+
+  /**
+   * All following fields are filled by tetromino_push function
+   * and refered to the last tetromino play.
+   */
+  uint8_t last_height; /* Last tetromino height. */
+  uint8_t nr_line_completed; /* Number of lines completed. */
 };
 
 static inline uint8_t check_coord(uint8_t y, uint8_t x)
@@ -69,8 +76,9 @@ void wall_destroy(struct wall *w)
   FREE(w, SID_WALL);
 }
 
-void wall_set(struct wall *w, uint8_t y, uint8_t x)
+bool wall_set(struct wall *w, uint8_t y, uint8_t x)
 {
+  bool line_completed = false;
   uint8_t ry = check_coord(y, x);
   assert(w->table[ry][x] == EMPTY);
   w->table[ry][x] = FILLED;
@@ -83,10 +91,13 @@ void wall_set(struct wall *w, uint8_t y, uint8_t x)
   /* Line is completed ? */
   if (++w->cells[ry] == WALL_WIDTH) {
     complete_line(w, ry);
+    line_completed = true;
   }
 
   /* Count number of holes. */
   count_holes(w, x);
+
+  return line_completed;
 }
 
 enum cell wall_get(struct wall *w, uint8_t y, uint8_t x)
@@ -110,4 +121,24 @@ uint8_t wall_hole_get(struct wall *w, uint8_t x)
 size_t wall_size_get(void)
 {
   return sizeof(struct wall);
+}
+
+uint8_t wall_last_tetromino_height_get(struct wall *w)
+{
+  return w->last_height;
+}
+
+void wall_last_tetromino_height_set(struct wall *w, uint8_t h)
+{
+  w->last_height = h;
+}
+
+uint8_t wall_nr_line_completed_get(struct wall *w)
+{
+  return w->nr_line_completed;
+}
+
+void wall_nr_line_completed_set(struct wall *w, uint8_t nr)
+{
+  w->nr_line_completed = nr;
 }

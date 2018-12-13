@@ -114,8 +114,8 @@ modules = [
   'profiling',
   'pool',
   'wall',
-  'eval',
   'tetromino',
+  'eval',
   'displayer',
 ]
 
@@ -123,7 +123,7 @@ modules = [
 foreach module : modules
   subdir(join_paths('src', module))
   unit_test_dir = join_paths('tests', 'unit', module)
-  if run_command('[', '-d', module, ']').returncode() == 0
+  if run_command('[', '-d', unit_test_dir, ']').returncode() == 0
     subdir(unit_test_dir)
   endif
 endforeach

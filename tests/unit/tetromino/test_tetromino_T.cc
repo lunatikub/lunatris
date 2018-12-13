@@ -22,6 +22,12 @@ TEST_F(Tetromino, TYaxis)
   EXPECT_EQ(tetromino_push(wall, TETROMINO_T, 0, 0), TETROMINO_EINVAL_Y);
 }
 
+TEST_F(Tetromino, T_h)
+{
+  tetromino_push(wall, TETROMINO_T, 0, 0);
+  EXPECT_EQ(wall_last_tetromino_height_get(wall), 2);
+}
+
 TEST_F(Tetromino, T)
 {
   tetromino_push(wall, TETROMINO_T, 0, 0);

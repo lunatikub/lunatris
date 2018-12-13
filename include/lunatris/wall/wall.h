@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #include <lunatris/lunatris.h>
 
@@ -26,8 +27,9 @@ void wall_destroy(wall_t wall);
  * @param wall Wall handle.
  * @param y y-axis coord.
  * @param x x-axis coord.
+ * @return True has been completed, otherwise return false.
  */
-void wall_set(wall_t wall, uint8_t y, uint8_t x);
+bool wall_set(wall_t wall, uint8_t y, uint8_t x);
 
 /**
  * Get a cell of the wall.
@@ -60,5 +62,25 @@ uint8_t wall_hole_get(wall_t w, uint8_t x);
  * @return size of a wall.
  */
 size_t wall_size_get(void);
+
+/**
+ * Get the last tetromino height.
+ */
+uint8_t wall_last_tetromino_height_get(wall_t w);
+
+/**
+ * Set the last tetromino height.
+ */
+void wall_last_tetromino_height_set(wall_t w, uint8_t h);
+
+/**
+ * Get the number of lines completed by the last play.
+ */
+uint8_t wall_nr_line_completed_get(struct wall *w);
+
+/**
+ * Set the number of lines completed by the last play.
+ */
+void wall_nr_line_completed_set(struct wall *w, uint8_t nr);
 
 #endif /* !WALL_H_ */

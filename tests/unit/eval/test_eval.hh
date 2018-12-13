@@ -6,6 +6,7 @@
 extern "C" {
 #include <lunatris/wall/wall.h>
 #include <lunatris/eval/eval.h>
+#include <lunatris/tetromino/tetromino.h>
 }
 
 class Eval: public testing::Test

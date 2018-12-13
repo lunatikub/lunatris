@@ -83,13 +83,19 @@ static void
 tetromino_wall_set(const struct tetromino_def *def,
                    wall_t wall, uint8_t h, uint8_t x)
 {
+  uint8_t nr_line_completed = 0;
+
   for (uint8_t i = 0; i < TETROMINO_SZ; ++i) {
     for (uint8_t j = 0; j < TETROMINO_SZ; ++j) {
       if (def->t[i][j]) {
-        wall_set(wall, TETROMINO_SZ - i + h - 1, j + x);
+        if (wall_set(wall, TETROMINO_SZ - i + h - 1, j + x) == true) {
+          ++nr_line_completed;
+        }
       }
     }
   }
+
+  wall_nr_line_completed_set(wall, nr_line_completed);
 }
 
 enum tetromino_error
@@ -115,6 +121,7 @@ tetromino_push(wall_t wall, enum tetromino tetromino,
     return TETROMINO_EINVAL_Y;
   }
 
+  wall_last_tetromino_height_set(wall, h + def->h);
   tetromino_wall_set(def, wall, h, x);
   return TETROMINO_OK;
 }
