@@ -36,4 +36,20 @@ uint32_t eval_hole(wall_t w);
  */
 uint32_t eval_well(wall_t w);
 
+/**
+ * Name: Height of the last tetromino.
+ * Description: Height of the last tetromino played.
+ * ID: l
+ * Aim: Prevent to grow up the height of the wall.
+ */
+uint32_t eval_height(wall_t w);
+
+/**
+ * Name: Erosion
+ * Description: Number of lines completed with the last play.
+ * ID: e
+ * Aim: Encourage to complete lines.
+ */
+uint32_t eval_erosion(wall_t w);
+
 #endif /* !EVAL_H_ */
